@@ -1,0 +1,54 @@
+83. Remove Duplicates from Sorted List
+--------------------------------------------------------FIRST METHOD------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL||head->next==NULL){
+            return head;
+        }
+        
+        ListNode*move1 = head;
+        ListNode*move2 = head->next;
+        while(move2!=NULL){
+            while(move2!=NULL&&move2->val==move1->val){
+                move2 = move2->next;
+            }
+            move1->next = move2;
+            move1 = move2;
+        }
+        return head;
+    }
+};
+--------------------------------------------------------SECOND METHOD------------------------------------------------------------------------------------------------
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL||head->next==NULL){
+            return head;
+        }
+        
+        ListNode*prev = head;
+        ListNode*curr = head->next;
+        while(curr!=NULL){
+            if(prev->val!=curr->val){
+                prev->next = curr;
+                prev = curr;
+            }
+            curr = curr->next;
+        }
+        prev->next = curr;
+        return head;
+    }
+};
+--------------------------------------------------------THIRD METHOD------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL||head->next==NULL){
+            return head;
+        }
+        head->next = deleteDuplicates(head->next);
+        if(head->val==head->next->val){
+            return head->next;
+        }
+        return head;
+    }
+};

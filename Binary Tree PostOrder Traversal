@@ -1,0 +1,63 @@
+----------------------------------------------------
+Time Complexity - O(N)
+Space Complexity - O(H) 
+
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(root==NULL){
+            vector<int> v;
+            return v;
+        }
+        
+        vector<int> left = postorderTraversal(root->left);
+        vector<int> right = postorderTraversal(root->right);
+        
+        for(int i =0; i<right.size(); i++){
+            left.push_back(right[i]);
+        }
+        left.push_back(root->val);
+        return left;
+    }
+};
+----------------------------------------------------
+----------------------------------------------------
+----------------------------------------------------
+----------------------------------------------------
+--------------USING TWO STACKS----------------------
+Time Complexity - O(N)
+Space Complexity - O(N)
+#include<stack>
+vector <int> postOrder(Node* root)
+{
+  // Your code here
+  if(root==NULL){
+      vector<int> v;
+      return v;
+  }
+  vector<int> v;
+  stack<Node*> s1;
+  stack<int> s2;
+  s1.push(root);
+  
+  while(s1.size()!=0){
+    Node*top = s1.top();
+    s1.pop();
+    s2.push(top->data);
+    if(top->left){
+        s1.push(top->left);
+    }
+    if(top->right){
+        s1.push(top->right);
+    }
+  }
+  while(!s2.empty()){
+    v.push_back(s2.top());
+    s2.pop();
+  }
+  return v;
+} 
+----------------------------------------------------
+----------------------------------------------------
+----------------------------------------------------
+------------USING ONE STACK-------------------------

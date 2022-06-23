@@ -36,7 +36,6 @@ public:
 };
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#include<stack>
 #include<queue>
 vector<int> reverseLevelOrder(Node *root)
 {
@@ -52,7 +51,7 @@ vector<int> reverseLevelOrder(Node *root)
     while(!pendingNodes.empty()){
         Node*front = pendingNodes.front();
         pendingNodes.pop();
-        reverseNodes.push(front->data);
+        v.push_back(front->data);
         if(front->right){
             pendingNodes.push(front->right);
         }
@@ -60,9 +59,6 @@ vector<int> reverseLevelOrder(Node *root)
             pendingNodes.push(front->left);
         }
     }
-    while(!reverseNodes.empty()){
-        v.push_back(reverseNodes.top());
-        reverseNodes.pop();
-    }
+    reverse(v.begin(), v.end());
     return v;
 }

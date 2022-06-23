@@ -26,3 +26,24 @@ public:
 
 Time Complexity - O(N)
 Space Complexity - O(H)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    int diameterOfBinaryTree(TreeNode*root, int &diameter){
+        if(root==NULL){
+            return 0;
+        }
+        
+        int lh = diameterOfBinaryTree(root->left, diameter);
+        int rh = diameterOfBinaryTree(root->right, diameter);
+        diameter = max(diameter, lh+rh);
+        return max(lh, rh) + 1;
+        
+    }
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+        int diameter = 0;
+        diameterOfBinaryTree(root, diameter);
+        return diameter;
+    }
+};

@@ -34,3 +34,35 @@ public:
         return v;
     }
 };
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include<stack>
+#include<queue>
+vector<int> reverseLevelOrder(Node *root)
+{
+    // code here
+    if(root==NULL){
+        vector<int> v;
+        return v;
+    }
+    vector<int> v;
+    queue<Node*> pendingNodes;
+    stack<int> reverseNodes;
+    pendingNodes.push(root);
+    while(!pendingNodes.empty()){
+        Node*front = pendingNodes.front();
+        pendingNodes.pop();
+        reverseNodes.push(front->data);
+        if(front->right){
+            pendingNodes.push(front->right);
+        }
+        if(front->left){
+            pendingNodes.push(front->left);
+        }
+    }
+    while(!reverseNodes.empty()){
+        v.push_back(reverseNodes.top());
+        reverseNodes.pop();
+    }
+    return v;
+}

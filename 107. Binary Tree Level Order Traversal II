@@ -1,0 +1,36 @@
+Time Complexity - O(N)
+Space Complexity - O(N)\
+
+#include<queue>
+#include<algorithm>
+class Solution {
+public:
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        if(root==NULL){
+            vector<vector<int>> v;
+            return v;
+        }
+        
+        vector<vector<int>> v;
+        queue<TreeNode*> pendingNodes;
+        pendingNodes.push(root);
+        while(!pendingNodes.empty()){
+            int j = pendingNodes.size();
+            vector<int> k;
+            for(int i = 0; i<j; i++){
+                TreeNode* front = pendingNodes.front();
+                pendingNodes.pop();
+                k.push_back(front->val);
+                if(front->left){
+                    pendingNodes.push(front->left);
+                }
+                if(front->right){
+                    pendingNodes.push(front->right);
+                }
+            }
+            v.push_back(k);
+        }
+        reverse(v.begin(), v.end());
+        return v;
+    }
+};

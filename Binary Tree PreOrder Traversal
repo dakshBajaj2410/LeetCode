@@ -1,0 +1,54 @@
+---------------------------------------------------
+-------------------RECURSION-----------------------
+Time Complexity - O(N)
+Space Complexity - O(H)
+
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  if(root==NULL){
+      vector<int> v;
+      return v;
+  }
+  
+  vector<int> v;
+  v.push_back(root->data);
+  vector<int> left = preorder(root->left);
+  vector<int> right = preorder(root->right);
+  for(int i = 0; i<left.size(); i++){
+      v.push_back(left[i]);
+  }
+  for(int i = 0; i<right.size(); i++){
+      v.push_back(right[i]);
+  }
+  return v;
+}
+---------------------------------------------------
+-------------------ITERATIVE-----------------------
+Time Complexity - O(N)
+Space Complexity - O(H)
+
+#include<stack>
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  if(root==NULL){
+      vector<int> v;
+      return v;
+  }
+  vector<int> v;
+  stack<Node*> s;
+  s.push(root);
+  while(!s.empty()){
+      Node* top = s.top();
+      v.push_back(top->data);
+      s.pop();
+      if(top->right){
+          s.push(top->right);
+      }
+      if(top->left){
+          s.push(top->left);
+      }
+  }
+  return v;
+}

@@ -37,3 +37,36 @@ public:
         return v;
     }
 };
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include<queue>
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(root==NULL){
+            vector<vector<int>> v;
+            return v;
+        }
+
+        queue<TreeNode*> pendingNodes;
+        pendingNodes.push(root);
+        vector<vector<int>> v;
+        while(!pendingNodes.empty()){
+            vector<int> j;
+            int k = pendingNodes.size();
+            for(int i = 0; i<k; i++){
+                TreeNode*front = pendingNodes.front();
+                pendingNodes.pop();
+                j.push_back(front->val);
+                if(front->left){
+                    pendingNodes.push(front->left);
+                }
+                if(front->right){
+                    pendingNodes.push(front->right);
+                }
+            }
+            v.push_back(j);
+        }
+        return v;
+    }
+};

@@ -1,0 +1,33 @@
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+Time Complexity - O(N)
+Space Complexity - O(H)
+#include<queue>
+vector<int> leftView(Node *root)
+{
+   // Your code here
+   vector<int> ans;
+   if(root==NULL){
+       return ans;
+   }
+   queue<Node*> pendingNodes;
+   pendingNodes.push(root);
+   while(!pendingNodes.empty()){
+       Node*front = pendingNodes.front();
+       ans.push_back(front->data);
+       int size = pendingNodes.size();
+       while(size!=0){
+           Node*front = pendingNodes.front();
+           pendingNodes.pop();
+           size--;
+           if(front->left){
+               pendingNodes.push(front->left);
+           }
+           if(front->right){
+               pendingNodes.push(front->right);
+           }
+       }
+   }
+return ans;
+}
